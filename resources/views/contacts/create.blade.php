@@ -12,7 +12,7 @@
 <input type="text" name="phone" required> 
 </div> 
 <div> 
-<label>email:</label> 
+<label>Email:</label> 
 <input type="email" name="email" required> 
 </div> 
 <button type="submit">Save</button> 
