@@ -10,10 +10,12 @@ public function index()
 $contacts = Contact::all(); 
 return view('contacts.index', compact('contacts')); 
 } 
+
 public function create() 
 { 
 return view('contacts.create'); 
 } 
+
 public function store(Request $request) 
 { 
 $request->validate([ 
@@ -24,5 +26,11 @@ $request->validate([
 Contact::create($request->only('name', 'phone', 'email')); 
 return redirect()->route('contacts.index')->with('success', 'Contact  added successfully!'); 
 } 
+
+    public function destroy(Contact $contact)
+    {
+        $contact->delete();
+        return redirect()->route('contacts.index')->with('success', 'kontaktas ištrintas');
+    }
 }
 
