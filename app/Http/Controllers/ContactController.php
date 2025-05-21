@@ -43,7 +43,7 @@ public function trashed()
 public function restore($id)
 {
     Contact::withTrashed()->findOrFail($id)->restore();
-    return redirect()->route('contats.trashed')->with('success', 'Kontaktas atkurtas!');
+    return redirect()->route('contacts.trashed')->with('success', 'Kontaktas atkurtas!');
 }
 
 public function forceDelete($id)

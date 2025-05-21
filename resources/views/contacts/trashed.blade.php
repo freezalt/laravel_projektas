@@ -26,13 +26,13 @@
                         <tr>
                             <td>{{ $Contact->id }} - {{ $Contact->name }} - {{ $Contact->phone }} - {{ $Contact->email }}</td>
                             <td>
-                                <form action="{{ route('contacts.restore', $contact->id) }}" method="POST" class="d-inline">
+                                <form action="{{ route('contacts.restore', $Contact->id) }}" method="POST" class="d-inline">
                                     @csrf
                                     <button type="submit" class="btn btn-success btn-sm">Atkurti</button>
                                 </form>
 
 
-                                <form action="{{ route('contacts.forceDelete', $contact->id) }}" method="POST" class="d-inline">
+                                <form action="{{ route('contacts.forceDelete', $Contact->id) }}" method="POST" class="d-inline">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Ar tikrai norite visiškai ištrinti?')">Ištrinti visam laikui</button>
