@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ContactController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -16,12 +17,12 @@ Route::middleware([
     })->name('dashboard');
 });
 
-use App\Http\Controllers\ContactController;
 
 Route::prefix('c')->group(function () { 
 Route::get('/', [ContactController::class, 'index'])->name('contacts.index'); 
 Route::get('/contacts/create', [ContactController::class, 'create'])->middleware('auth')->name('contacts.create'); 
 Route::post('/contacts', [ContactController::class, 'store'])->middleware('auth')->name('contacts.store'); 
-Route::delete('/Contacts/{contact}', [ContactController:: class, 'dastroy'])->middleware('auth')->name('contacts.dastroy');
+
+Route::delete('/contacts/{Contact}', [ContactController::class, 'destroy'])->middleware('auth')->name('contacts.destroy');
 });
 
