@@ -16,7 +16,8 @@
         @endforeach 
 </ul> 
 @auth 
-    <a href="{{ route('contacts.create') }}">Add New Contact</a> 
+    <a href="{{ route('contacts.create') }}">Add New Contact</a><br>
+     <a href="{{ route('contacts.trashed') }}" class="btn btn-success">Rodyti pašalintus</a>
 @endauth 
 </div> 
 @endsection

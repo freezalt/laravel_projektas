@@ -8,7 +8,7 @@ class ContactController extends Controller
 { 
 public function index() 
 { 
-    $contacts = Contact::all(); 
+    $contacts = Contact::paginate(20); 
     return view('contacts.index', compact('contacts')); 
 } 
 
@@ -28,10 +28,30 @@ public function store(Request $request)
     return redirect()->route('contacts.index')->with('success', 'Contact  added successfully!'); 
 } 
 
-public function destroy(Contact $contacts)
+public function destroy(Contact $contact)
 {
-    $contacts->delete();
+    $contact->delete();
     return redirect()->route('contacts.index')->with('success', 'kontaktas ištrintas');
 }
+
+public function trashed()
+{
+    $contacts = Contact::onlyTrashed()->paginate(20);
+    return view('contacts.trashed', compact('contacts'));
+}
+
+public function restore($id)
+{
+    Contact::withTrashed()->findOrFail($id)->restore();
+    return redirect()->route('contats.trashed')->with('success', 'Kontaktas atkurtas!');
+}
+
+public function forceDelete($id)
+{
+    Contact::withTrashed()->findOrFail($id)->forceDelete();
+    return redirect()->route('contacts.trashed')->with('success', 'Kontaktas visam laikui pašalintas.');
+}
+
+
 }
 
