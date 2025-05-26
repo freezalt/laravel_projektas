@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\text;
+use App\Http\Controllers\pdf;
+use App\Http\Controllers\PDFController;
 
 Route::get('/', function () {return view('welcome');});
 
@@ -10,6 +12,7 @@ Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified',])
 Route::get('/dashboard', function () {return view('dashboard');})->name('dashboard');});
 
 Route::post('/c', [text::class, 'Mail'])->name('open.form');
+Route::post('/c', [pdf::class, 'Mail'])->name('pdf.form');
 Route::post('/email/form', [ContactController::class, 'submit'])->name('submit.form');
 
 Route::prefix('c')->group(
@@ -29,4 +32,4 @@ Route::prefix('c')->group(
         Route::resource('contacts', ContactController::class);
 });
 
-
+Route::get('/generate-pdf', [PDFController::class, 'generatePDF']);

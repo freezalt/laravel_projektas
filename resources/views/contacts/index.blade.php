@@ -18,7 +18,7 @@
 @auth 
     <a href="{{ route('contacts.create') }}">Add New Contact</a><br>
      <a href="{{ route('contacts.trashed') }}" class="btn btn-success">Rodyti pašalintus</a><br>
-     <a href="{{ route('submit.form') }}">forma</a>
+     <a href="{{ route('pdf.form') }}">forma</a>
 @endauth 
 </div> 
 @endsection
