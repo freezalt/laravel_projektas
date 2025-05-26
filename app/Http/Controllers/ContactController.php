@@ -1,8 +1,11 @@
 <?php
 namespace App\Http\Controllers; 
+
 use App\Models\Contact; 
 use Illuminate\Http\Request; 
-use App\Http\Controllers\Controller; 
+use App\Http\Controllers\Controller;
+use App\Mail\FormSubmissionMail;
+use Illuminate\Support\Facades\Mail;
 
 class ContactController extends Controller 
 { 
@@ -52,6 +55,15 @@ public function forceDelete($id)
     return redirect()->route('contacts.trashed')->with('success', 'Kontaktas visam laikui pašalintas.');
 }
 
+    public function submit(Request $request)
+    {
+        $formData = $request->all();
+
+        // Išsiunčiame el. laišką su formos duomenimis
+        Mail::to('rokas.raustys@stud.svako.lt')->send(new FormSubmissionMail($formData));
+
+        return back()->with('success', 'Forma sėkmingai pateikta ir kopija išsiųsta el. paštu.');
+    }
 
 }
 
